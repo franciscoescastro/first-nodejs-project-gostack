@@ -1,20 +1,30 @@
-import { uuid } from 'uuidv4';
+import { uuid } from 'uuidv4'
+
+type constructorParameters = Omit<Transaction, 'id' | 'isIncome' | 'isOutcome'>
 
 class Transaction {
-  id: string;
+  id: string
 
-  title: string;
+  title: string
 
-  value: number;
+  value: number
 
-  type: 'income' | 'outcome';
+  type: 'income' | 'outcome'
 
-  constructor({ title, value, type }: Omit<Transaction, 'id'>) {
-    this.id = uuid();
-    this.title = title;
-    this.value = value;
-    this.type = type;
+  constructor({ title, value, type }: constructorParameters) {
+    this.id = uuid()
+    this.title = title
+    this.value = value
+    this.type = type
+  }
+
+  public isIncome(): boolean {
+    return this.type === 'income'
+  }
+
+  public isOutcome(): boolean {
+    return this.type === 'outcome'
   }
 }
 
-export default Transaction;
+export default Transaction
